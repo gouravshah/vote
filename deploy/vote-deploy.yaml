@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: vote
+  name: vote
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: vote
+  minReadySeconds: 20 
+  strategy: 
+    rollingUpdate: 
+      maxSurge: 2
+      maxUnavailable: 1
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: vote
+    spec:
+      containers:
+      - image: schoolofdevops/vote:v4
+        name: vote
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
